@@ -8,7 +8,7 @@
 import UIKit
 
 class WatherViewController: UIViewController {
-
+//01
     let backgroundView = UIImageView()
 
     override func viewDidLoad() {
@@ -17,7 +17,6 @@ class WatherViewController: UIViewController {
     style()
     layout()
     }
-    
 }
 
 extension WatherViewController {
@@ -26,8 +25,6 @@ extension WatherViewController {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.image = UIImage(named: "background")
         backgroundView.contentMode = .scaleAspectFill
-        
-        
     }
     
     func layout() {
@@ -39,10 +36,7 @@ extension WatherViewController {
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
         ])
-        
-        
     }
 }
 
