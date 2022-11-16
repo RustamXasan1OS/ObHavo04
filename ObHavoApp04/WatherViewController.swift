@@ -10,25 +10,17 @@ import UIKit
 class WatherViewController: UIViewController {
     
     let backgroundView = UIImageView()
-    
-    //06
     let rootStackView = UIStackView()
-    
-    //01
     let searchStackView = UIStackView()
     //search
     let locationButton = UIButton()
     let searchButton = UIButton()
     let searchTextField = UITextField()
-    
-    //11 weather
+    //weather
     let conditationImageView = UIImageView()
-    //15
     let temperatureLabel = UILabel()
     let cityLabel  = UILabel()
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,13 +36,11 @@ extension WatherViewController {
         backgroundView.image = UIImage(named: "background")
         backgroundView.contentMode = .scaleAspectFill
         
-        //07
         rootStackView.translatesAutoresizingMaskIntoConstraints = false
         rootStackView.axis = .vertical
         rootStackView.alignment = .trailing
         rootStackView.spacing = 10
         
-        //02 search
         searchStackView.translatesAutoresizingMaskIntoConstraints = false
         searchStackView.spacing = 8
         
@@ -69,51 +59,72 @@ extension WatherViewController {
         searchTextField.borderStyle = .roundedRect
         searchTextField.backgroundColor  = .systemFill
         
-        //12 weather
         conditationImageView.translatesAutoresizingMaskIntoConstraints = false
         conditationImageView.image = UIImage(systemName: "sun.max.fill")
         conditationImageView.tintColor = .systemYellow
         
-        //16
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         temperatureLabel.font = UIFont.systemFont(ofSize: 50)
-        temperatureLabel.text = "15°C"
-        temperatureLabel.textColor = .systemOrange
-        
+        //o'chirildi
+//        temperatureLabel.text = "15°C"
+//        temperatureLabel.textColor = .systemOrange
+        //03
+        temperatureLabel.attributedText = makeTemoeratureText(with: "21")
         
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         cityLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        cityLabel.text = "TashkentCity"
-        cityLabel.textColor = .systemBlue   
+//        cityLabel.text = "TashkentCity"
+//        cityLabel.textColor = .systemBlue
+        //04
+        cityLabel.attributedText = makeCityText(with: "Tashkent")
         
+    }
+    //01
+    private func makeTemoeratureText(with temperature: String) -> NSAttributedString {
+        
+        var boldTextAttributes = [NSAttributedString.Key:AnyObject]()
+        boldTextAttributes[.foregroundColor] = UIColor.systemIndigo
+        boldTextAttributes[.font] = UIFont.boldSystemFont(ofSize: 80)
+        
+        var plainTextAtributes = [NSAttributedString.Key:AnyObject]()
+        plainTextAtributes[.foregroundColor] = UIColor.systemOrange
+        plainTextAtributes[.font] = UIFont.systemFont(ofSize: 50)
+        
+        let text = NSMutableAttributedString(string: temperature, attributes: boldTextAttributes)
+        text.append(NSAttributedString(string: "°C", attributes: plainTextAtributes))
+        
+        return text
+    }
+    //02
+    private func makeCityText(with City: String) -> NSAttributedString {
+        
+        var TashkentTextAttributes = [NSAttributedString.Key:AnyObject]()
+        TashkentTextAttributes[.foregroundColor] = UIColor.systemBlue
+        TashkentTextAttributes[.font] = UIFont.boldSystemFont(ofSize: 40)
+        
+        var CityTextAtributes = [NSAttributedString.Key:AnyObject]()
+        CityTextAtributes[.foregroundColor] = UIColor.systemGreen
+        CityTextAtributes[.font] = UIFont.boldSystemFont(ofSize: 55)
+        
+        let text = NSMutableAttributedString(string: City, attributes: TashkentTextAttributes)
+        text.append(NSAttributedString(string: "City", attributes: CityTextAtributes))
+        
+        return text
     }
     
     func layout() {
         
         view.addSubview(backgroundView)
-        
-//        //05
-//        view.addSubview(searchStackView)
-        
-        //08
         view.addSubview(rootStackView)
         
-        //09
         rootStackView.addArrangedSubview(searchStackView)
-        
-        //13
         rootStackView.addArrangedSubview(conditationImageView)
-        
-        //17
         rootStackView.addArrangedSubview(temperatureLabel)
         rootStackView.addArrangedSubview(cityLabel)
         
-        //03
         searchStackView.addArrangedSubview(locationButton)
-        
         searchStackView.addArrangedSubview(searchTextField)
         searchStackView.addArrangedSubview(searchButton)
-        
         
         //AutoLayout
         NSLayoutConstraint.activate([
@@ -121,30 +132,24 @@ extension WatherViewController {
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            //10
+        
             rootStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             rootStackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: rootStackView.trailingAnchor, multiplier: 1),
             
-            
-            //04
             searchStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchStackView.leadingAnchor.constraint(equalToSystemSpacingAfter:view.leadingAnchor, multiplier: 1),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: rootStackView.trailingAnchor, multiplier: 1),
             searchStackView.widthAnchor.constraint(equalTo: rootStackView.widthAnchor),
-            
-
+        
             locationButton.widthAnchor.constraint(equalToConstant: 40),
             locationButton.heightAnchor.constraint(equalToConstant: 40),
-            
-
+        
             searchButton.widthAnchor.constraint(equalToConstant: 40),
             searchButton.heightAnchor.constraint(equalToConstant: 40),
             
-            //14
-            conditationImageView.heightAnchor.constraint(equalToConstant: 120),
-            conditationImageView.widthAnchor.constraint(equalToConstant: 120),
+            conditationImageView.heightAnchor.constraint(equalToConstant: 150),
+            conditationImageView.widthAnchor.constraint(equalToConstant: 150),
             
         ])
     }
